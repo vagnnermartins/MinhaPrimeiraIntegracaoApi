@@ -1,7 +1,6 @@
 package com.example.minhaprimeiraapi
 
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.minhaprimeiraapi.adapter.ItemAdapter
@@ -38,6 +37,7 @@ class MainActivity : AppCompatActivity() {
 
             // Alterando execução para Main thread
             withContext(Dispatchers.Main) {
+                binding.swipeRefreshLayout.isRefreshing = false
                 when (result) {
                     is Result.Error -> {}
                     is Result.Success -> handleOnSuccess(result.data)
@@ -59,5 +59,9 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupView() {
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            binding.swipeRefreshLayout.isRefreshing = true
+            fetchItems()
+        }
     }
 }

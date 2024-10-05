@@ -40,7 +40,7 @@ class ItemAdapter(
 
         holder.ageTextView.text = holder.itemView.context.getString(R.string.item_age, item.value.age.toString())
 
-        holder.addressTextView.text = item.value.age.toString()
+        holder.addressTextView.text = item.value.address
 
         Picasso.get()
             .load(item.value.imageUrl)

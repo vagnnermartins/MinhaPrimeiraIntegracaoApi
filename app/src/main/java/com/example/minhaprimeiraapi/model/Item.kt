@@ -6,5 +6,10 @@ data class Item(
 )
 
 data class ItemValue(
-    val id: String
+    val id: String,
+    val name: String,
+    val surname: String,
+    val address: String,
+    val imageUrl: String,
+    val age: Int
 )

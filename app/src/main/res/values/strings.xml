@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">MinhaPrimeiraApi</string>
+    <string name="app_name">Minha Primeira Api</string>
+    <string name="item_age">%1$s anos</string>
 </resources>

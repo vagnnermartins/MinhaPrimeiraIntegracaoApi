@@ -3,7 +3,9 @@ package com.example.minhaprimeiraapi
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.minhaprimeiraapi.adapter.ItemAdapter
 import com.example.minhaprimeiraapi.databinding.ActivityMainBinding
+import com.example.minhaprimeiraapi.model.Item
 import com.example.minhaprimeiraapi.service.Result
 import com.example.minhaprimeiraapi.service.RetrofitClient
 import com.example.minhaprimeiraapi.service.safeApiCall
@@ -37,10 +39,15 @@ class MainActivity : AppCompatActivity() {
             withContext(Dispatchers.Main) {
                 when (result) {
                     is Result.Error -> {}
-                    is Result.Success -> {}
+                    is Result.Success -> handleOnSuccess(result.data)
                 }
             }
         }
+    }
+
+    private fun handleOnSuccess(data: List<Item>) {
+        val adapter = ItemAdapter(data)
+        binding.recyclerView.adapter = adapter
     }
 
     private fun setupView() {

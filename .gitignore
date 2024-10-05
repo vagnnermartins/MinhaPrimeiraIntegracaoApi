@@ -1,0 +1,65 @@
+# Ignore gradle files
+.gradle/
+build/
+**/build/
+!gradle/wrapper/gradle-wrapper.jar
+
+# Ignore .idea folder (Android Studio/IntelliJ)
+.idea/
+.idea/caches/
+.idea/libraries/
+.idea/modules.xml
+.idea/.name
+.idea/workspace.xml
+.idea/gradle.xml
+.idea/misc.xml
+.idea/dictionaries/
+.idea/assetWizardSettings.xml
+.idea/copyright/
+.idea/jsLibraryMappings.xml
+
+# Ignore Gradle wrapper jar files
+gradle/wrapper/gradle-wrapper.properties
+
+# Ignore any generated files
+local.properties
+*.iml
+*.hprof
+*.log
+
+# Ignore Mac system files
+.DS_Store
+
+# Android specific files
+*.apk
+*.ap_
+*.db
+*.cxx
+*.so
+*.lock
+*.keystore
+output.json
+
+# Ignore lint and Android Studio build folder
+lint/reports/
+lint/results/
+captures/
+
+# Ignore signing config files
+signing/
+
+# Ignore .env files or secrets
+.env
+.env.local
+.env.*
+
+# Ignore crashlytics and firebase files
+crashlytics.properties
+fabric.properties
+firebase-debug.log
+
+# Ignore generated translation files
+generated/
+
+# Proguard
+proguard/

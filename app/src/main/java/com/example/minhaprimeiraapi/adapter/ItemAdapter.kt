@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.minhaprimeiraapi.R
 import com.example.minhaprimeiraapi.model.Item
+import com.squareup.picasso.Picasso
 
 class ItemAdapter(
     private val items: List<Item>
@@ -34,6 +35,12 @@ class ItemAdapter(
 
         holder.ageTextView.text = holder.itemView.context.getString(R.string.item_age, item.value.age.toString())
 
-        holder.addressTextView.text = item.value.address
+        holder.addressTextView.text = item.value.age.toString()
+
+        Picasso.get()
+            .load(item.value.imageUrl)
+            .placeholder(R.drawable.ic_download)
+            .error(R.drawable.ic_error)
+            .into(holder.imageView)
     }
 }

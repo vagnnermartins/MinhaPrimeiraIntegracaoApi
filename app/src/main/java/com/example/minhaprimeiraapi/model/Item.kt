@@ -14,5 +14,5 @@ data class ItemValue(
     val address: String,
     val imageUrl: String,
     val age: Int,
-    val birth: Date?
+    val date: Date?
 )

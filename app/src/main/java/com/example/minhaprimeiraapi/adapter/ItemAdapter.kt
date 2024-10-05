@@ -12,7 +12,8 @@ import com.example.minhaprimeiraapi.ui.CircleTransform
 import com.squareup.picasso.Picasso
 
 class ItemAdapter(
-    private val items: List<Item>
+    private val items: List<Item>,
+    private val itemClickListener: (Item) -> Unit,
 ) : RecyclerView.Adapter<ItemAdapter.ItemViewHolder>() {
 
     class ItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -32,6 +33,9 @@ class ItemAdapter(
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         val item = items[position]
+        holder.itemView.setOnClickListener {
+            itemClickListener.invoke(item)
+        }
         holder.fullNameTextView.text = "${item.value.name} ${item.value.surname}"
 
         holder.ageTextView.text = holder.itemView.context.getString(R.string.item_age, item.value.age.toString())

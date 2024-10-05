@@ -46,7 +46,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun handleOnSuccess(data: List<Item>) {
-        val adapter = ItemAdapter(data)
+        val adapter = ItemAdapter(data) {
+            // listener do item clicado
+        }
         binding.recyclerView.adapter = adapter
     }
 

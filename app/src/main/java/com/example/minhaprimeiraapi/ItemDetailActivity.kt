@@ -3,6 +3,7 @@ package com.example.minhaprimeiraapi
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.minhaprimeiraapi.databinding.ActivityItemDetailBinding
 import com.example.minhaprimeiraapi.model.Item
@@ -35,6 +36,9 @@ class ItemDetailActivity : AppCompatActivity() {
         binding.toolbar.setNavigationOnClickListener {
             finish()
         }
+        binding.deleteCTA.setOnClickListener {
+            deleteItem()
+        }
     }
 
     private fun loadItem() {
@@ -49,6 +53,31 @@ class ItemDetailActivity : AppCompatActivity() {
                     is Result.Success -> {
                         item = result.data
                         handleSuccess()
+                    }
+                }
+            }
+        }
+    }
+
+    private fun deleteItem() {
+        CoroutineScope(Dispatchers.IO).launch {
+            val result = safeApiCall { RetrofitClient.apiService.deleteItem(item.id) }
+
+            withContext(Dispatchers.Main) {
+                when (result) {
+                    is Result.Error -> {
+                        Toast.makeText(
+                            this@ItemDetailActivity,
+                            R.string.error_delete,
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                    is Result.Success -> {
+                        Toast.makeText(
+                            this@ItemDetailActivity,
+                            R.string.success_delete,
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
                 }
             }

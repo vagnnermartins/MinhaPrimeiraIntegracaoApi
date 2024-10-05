@@ -1,6 +1,7 @@
 package com.example.minhaprimeiraapi
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.minhaprimeiraapi.adapter.ItemAdapter
@@ -48,6 +49,10 @@ class MainActivity : AppCompatActivity() {
     private fun handleOnSuccess(data: List<Item>) {
         val adapter = ItemAdapter(data) {
             // listener do item clicado
+            startActivity(ItemDetailActivity.newIntent(
+                this,
+                it.id
+            ))
         }
         binding.recyclerView.adapter = adapter
     }

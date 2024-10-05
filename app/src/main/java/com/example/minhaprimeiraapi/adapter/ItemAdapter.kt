@@ -8,8 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.minhaprimeiraapi.R
 import com.example.minhaprimeiraapi.model.Item
-import com.example.minhaprimeiraapi.ui.CircleTransform
-import com.squareup.picasso.Picasso
+import com.example.minhaprimeiraapi.ui.loadUrl
 
 class ItemAdapter(
     private val items: List<Item>,
@@ -42,11 +41,6 @@ class ItemAdapter(
 
         holder.addressTextView.text = item.value.address
 
-        Picasso.get()
-            .load(item.value.imageUrl)
-            .placeholder(R.drawable.ic_download)
-            .error(R.drawable.ic_error)
-            .transform(CircleTransform())
-            .into(holder.imageView)
+        holder.imageView.loadUrl(item.value.imageUrl)
     }
 }

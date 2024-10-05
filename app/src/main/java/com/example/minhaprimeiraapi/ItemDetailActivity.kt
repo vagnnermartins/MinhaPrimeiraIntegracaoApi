@@ -10,6 +10,7 @@ import com.example.minhaprimeiraapi.model.Item
 import com.example.minhaprimeiraapi.service.Result
 import com.example.minhaprimeiraapi.service.RetrofitClient
 import com.example.minhaprimeiraapi.service.safeApiCall
+import com.example.minhaprimeiraapi.ui.loadUrl
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -88,6 +89,7 @@ class ItemDetailActivity : AppCompatActivity() {
         binding.name.text = "${item.value.name} ${item.value.surname}"
         binding.age.text = getString(R.string.item_age, item.value.age.toString())
         binding.address.text = item.value.address
+        binding.image.loadUrl(item.value.imageUrl)
     }
 
     companion object {

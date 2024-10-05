@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.minhaprimeiraapi.R
 import com.example.minhaprimeiraapi.model.Item
+import com.example.minhaprimeiraapi.ui.CircleTransform
 import com.squareup.picasso.Picasso
 
 class ItemAdapter(
@@ -41,6 +42,7 @@ class ItemAdapter(
             .load(item.value.imageUrl)
             .placeholder(R.drawable.ic_download)
             .error(R.drawable.ic_error)
+            .transform(CircleTransform())
             .into(holder.imageView)
     }
 }

@@ -63,5 +63,8 @@ class MainActivity : AppCompatActivity() {
             binding.swipeRefreshLayout.isRefreshing = true
             fetchItems()
         }
+        binding.addCta.setOnClickListener {
+            startActivity(NewItemActivity.newIntent(this))
+        }
     }
 }

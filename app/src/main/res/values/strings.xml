@@ -8,4 +8,5 @@
     <string name="error_create">Erro ao criar o item</string>
     <string name="success_update">Item atualizado com sucesso</string>
     <string name="unknown_error">Erro desconhecido, tente novamente!</string>
+    <string name="denied_permission">Permissão não concedida</string>
 </resources>

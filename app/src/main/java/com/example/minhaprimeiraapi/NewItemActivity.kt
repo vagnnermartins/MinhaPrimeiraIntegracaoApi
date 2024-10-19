@@ -50,6 +50,7 @@ class NewItemActivity : AppCompatActivity() {
                 binding.address.text.toString(),
                 binding.imageUrl.text.toString(),
                 binding.age.text.toString().toInt(),
+                location = null,
                 Date()
             )
             val result = safeApiCall { RetrofitClient.apiService.addItem(itemValue) }

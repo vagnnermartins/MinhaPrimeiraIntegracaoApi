@@ -14,5 +14,12 @@ data class ItemValue(
     val profession: String,
     val imageUrl: String,
     val age: Int,
+    val location: ItemLocation?,
     val date: Date?
+)
+
+data class ItemLocation(
+    val name: String,
+    val latitude: Double,
+    val longitude: Double
 )

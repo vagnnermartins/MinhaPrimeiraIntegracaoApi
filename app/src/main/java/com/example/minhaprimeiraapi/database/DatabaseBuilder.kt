@@ -18,6 +18,7 @@ object DatabaseBuilder {
                 AppDatabase::class.java,
                 "app_database"
             )
+                .addMigrations(DatabaseMigrations.MIGRATION_1_TO_2)
                 .build()
             instance = newInstance
             newInstance

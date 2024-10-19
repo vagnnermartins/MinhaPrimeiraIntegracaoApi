@@ -11,7 +11,7 @@ data class ItemValue(
     val id: String,
     val name: String,
     val surname: String,
-    val address: String,
+    val profession: String,
     val imageUrl: String,
     val age: Int,
     val date: Date?

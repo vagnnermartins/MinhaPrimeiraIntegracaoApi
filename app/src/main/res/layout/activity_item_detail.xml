@@ -52,8 +52,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         tools:text="30 anos" />
 
-    <TextView
-        android:id="@+id/address"
+    <EditText
+        android:id="@+id/profession"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -61,16 +61,36 @@
         app:layout_constraintTop_toBottomOf="@id/age"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:text="Av Paulista 1000" />
+        tools:text="Engenheiro de Software" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <ImageButton
+        android:id="@+id/editCTA"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:src="@android:drawable/ic_menu_save"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintStart_toStartOf="@id/profession"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/guideline" />
 
     <ImageButton
         android:id="@+id/deleteCTA"
         android:layout_width="0dp"
         android:layout_height="60dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:src="@android:drawable/ic_menu_delete"/>
+        app:layout_constraintStart_toStartOf="@id/guideline"
+        app:layout_constraintEnd_toEndOf="@id/profession"
+        android:src="@android:drawable/ic_menu_delete" />
 
     <TextView
         android:id="@+id/errorState"

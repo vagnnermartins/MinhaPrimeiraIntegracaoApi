@@ -6,4 +6,6 @@
     <string name="error_validate_form">Por favor, preencha o campo: %1$s</string>
     <string name="success_create">Item %1$s criado com sucesso!</string>
     <string name="error_create">Erro ao criar o item</string>
+    <string name="success_update">Item atualizado com sucesso</string>
+    <string name="unknown_error">Erro desconhecido, tente novamente!</string>
 </resources>

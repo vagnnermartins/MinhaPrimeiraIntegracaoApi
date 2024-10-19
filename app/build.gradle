@@ -50,6 +50,14 @@ android {
     }
 }
 
+kapt {
+
+    // Define o diretório onde o Room exportará o esquema do banco de dados
+    arguments {
+        arg("room.schemaLocation", "$projectDir/schemas")
+    }
+}
+
 dependencies {
 
     implementation 'androidx.core:core-ktx:1.13.1'

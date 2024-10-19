@@ -6,6 +6,7 @@ import android.content.pm.PackageManager
 import android.content.pm.PackageManager.PERMISSION_GRANTED
 import android.location.Location
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
@@ -14,6 +15,8 @@ import androidx.core.app.ActivityCompat.checkSelfPermission
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.minhaprimeiraapi.adapter.ItemAdapter
+import com.example.minhaprimeiraapi.database.DatabaseBuilder
+import com.example.minhaprimeiraapi.database.model.UserLocation
 import com.example.minhaprimeiraapi.databinding.ActivityMainBinding
 import com.example.minhaprimeiraapi.model.Item
 import com.example.minhaprimeiraapi.service.Result
@@ -88,7 +91,13 @@ class MainActivity : AppCompatActivity() {
         fusedLocationClient.lastLocation.addOnCompleteListener { task: Task<Location> ->
             if (task.isSuccessful && task.result != null) {
                 val location = task.result
-
+                val userLocation = UserLocation(latitude = location.latitude, longitude = location.longitude)
+                Log.d("HELLO_WORLD", "Lat: ${userLocation.latitude} Long: ${userLocation.longitude}")
+                CoroutineScope(Dispatchers.IO).launch {
+                    DatabaseBuilder.getInstance()
+                        .userLocationDao()
+                        .insert(userLocation)
+                }
             } else {
                 Toast.makeText(this, R.string.unknown_error, Toast.LENGTH_SHORT).show()
             }

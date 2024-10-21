@@ -7,13 +7,16 @@ import okhttp3.Request
 import okhttp3.Response
 
 class GeoLocationInterceptor(private val userLocationDao: UserLocationDao): Interceptor {
+
+    /**
+     * interceptor para adicionar em todos os requests informações referentes ao UserLocation
+     */
     override fun intercept(chain: Interceptor.Chain): Response {
         val userLastLocation = runBlocking {
             userLocationDao.getLastLocation()
         }
 
         val originalRequest: Request = chain.request()
-
         val newRequest = userLastLocation?.let {
             originalRequest.newBuilder()
                 .addHeader("x-data-latitude", userLastLocation.latitude.toString())

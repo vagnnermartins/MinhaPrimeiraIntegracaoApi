@@ -3,6 +3,9 @@ package com.example.minhaprimeiraapi.database
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 
+/**
+ * Classe onde será armazenado as configurações de migrações de nosso Database
+ */
 object DatabaseMigrations {
 
     val MIGRATION_1_TO_2 = object : Migration(1, 2) {

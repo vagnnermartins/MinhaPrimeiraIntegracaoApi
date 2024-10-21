@@ -92,6 +92,7 @@ class ItemDetailActivity : AppCompatActivity(), OnMapReadyCallback{
     }
 
     private fun loadItem() {
+        // obter o ARG_ID que foi passado na criação da intent da activity atual
         val itemId = intent.getStringExtra(ARG_ID) ?: ""
 
         CoroutineScope(Dispatchers.IO).launch {
@@ -143,6 +144,35 @@ class ItemDetailActivity : AppCompatActivity(), OnMapReadyCallback{
         loadItemLocationInGoogleMap()
     }
 
+    override fun onMapReady(googleMap: GoogleMap) {
+        mMap = googleMap
+        if (::item.isInitialized) {
+            // se o item já foi carregado por nossa chamada
+            // carrega-lo no map
+            loadItemLocationInGoogleMap()
+        }
+    }
+
+    private fun loadItemLocationInGoogleMap() {
+        item.value.location?.let {
+            binding.googleMapContent.visibility = View.VISIBLE
+            val latLng = LatLng(it.latitude, it.longitude)
+            // Adiciona pin no Map
+            mMap.addMarker(
+                MarkerOptions()
+                    .position(latLng)
+                    .title(it.name)
+            )
+            // Move a camera do Map para a mesma localização do Pin
+            mMap.moveCamera(
+                CameraUpdateFactory.newLatLngZoom(
+                    latLng,
+                    17f
+                )
+            )
+        }
+    }
+
     companion object {
 
         private const val ARG_ID = "ARG_ID"
@@ -154,30 +184,5 @@ class ItemDetailActivity : AppCompatActivity(), OnMapReadyCallback{
             Intent(context, ItemDetailActivity::class.java).apply {
                 putExtra(ARG_ID, itemId)
             }
-    }
-
-    override fun onMapReady(googleMap: GoogleMap) {
-        mMap = googleMap
-        if (::item.isInitialized) {
-            loadItemLocationInGoogleMap()
-        }
-    }
-
-    private fun loadItemLocationInGoogleMap() {
-        item.value.location?.let {
-            binding.googleMapContent.visibility = View.VISIBLE
-            val latLng = LatLng(it.latitude, it.longitude)
-            mMap.addMarker(
-                MarkerOptions()
-                    .position(latLng)
-                    .title(it.name)
-            )
-            mMap.moveCamera(
-                CameraUpdateFactory.newLatLngZoom(
-                    latLng,
-                    17f
-                )
-            )
-        }
     }
 }

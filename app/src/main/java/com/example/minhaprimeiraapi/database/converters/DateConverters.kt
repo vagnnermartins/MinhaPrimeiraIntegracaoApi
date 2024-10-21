@@ -3,6 +3,9 @@ package com.example.minhaprimeiraapi.database.converters
 import androidx.room.TypeConverter
 import java.util.Date
 
+/**
+ * Date converters para "ensinar" nosso Database a trabalhar com o tipo Date
+ */
 class DateConverters {
 
     @TypeConverter

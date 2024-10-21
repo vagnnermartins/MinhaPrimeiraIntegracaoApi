@@ -8,6 +8,10 @@ object DatabaseBuilder {
 
     private var instance: AppDatabase? = null
 
+    /**
+     * metodo responsável por certificar que teremos uma estrutura
+     * singleton para o database
+     */
     fun getInstance(context: Context? = null): AppDatabase {
         return instance ?: synchronized(this) {
             if (context == null) {

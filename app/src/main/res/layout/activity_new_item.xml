@@ -70,6 +70,16 @@
         app:layout_constraintStart_toStartOf="@id/imageUrl"
         app:layout_constraintEnd_toEndOf="@id/imageUrl"/>
 
+    <ProgressBar
+        android:id="@+id/loadImageProgress"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="@id/imageUrl"
+        app:layout_constraintBottom_toBottomOf="@id/takePictureCta"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
     <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/profession"
         android:layout_width="0dp"

@@ -61,6 +61,15 @@
         app:layout_constraintEnd_toEndOf="@id/name"
         app:layout_constraintTop_toBottomOf="@id/age" />
 
+    <ImageButton
+        android:id="@+id/takePictureCta"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:src="@android:drawable/ic_menu_camera"
+        app:layout_constraintTop_toBottomOf="@id/imageUrl"
+        app:layout_constraintStart_toStartOf="@id/imageUrl"
+        app:layout_constraintEnd_toEndOf="@id/imageUrl"/>
+
     <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/profession"
         android:layout_width="0dp"
@@ -69,7 +78,7 @@
         android:hint="Profession"
         app:layout_constraintStart_toStartOf="@id/name"
         app:layout_constraintEnd_toEndOf="@id/name"
-        app:layout_constraintTop_toBottomOf="@id/imageUrl" />
+        app:layout_constraintTop_toBottomOf="@id/takePictureCta" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/mapContent"

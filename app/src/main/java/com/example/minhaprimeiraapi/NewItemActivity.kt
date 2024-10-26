@@ -1,16 +1,25 @@
 package com.example.minhaprimeiraapi
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageManager
+import android.content.pm.PackageManager.PERMISSION_GRANTED
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.location.Location
+import android.net.Uri
 import android.os.Bundle
+import android.os.Environment
+import android.provider.MediaStore
 import android.view.View
 import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat.requestPermissions
 import androidx.core.content.ContextCompat.checkSelfPermission
+import androidx.core.content.FileProvider
 import com.example.minhaprimeiraapi.databinding.ActivityNewItemBinding
 import com.example.minhaprimeiraapi.model.ItemLocation
 import com.example.minhaprimeiraapi.model.ItemValue
@@ -30,7 +39,9 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.io.File
 import java.security.SecureRandom
+import java.text.SimpleDateFormat
 import java.util.Date
 
 class NewItemActivity : AppCompatActivity(), OnMapReadyCallback {
@@ -40,6 +51,18 @@ class NewItemActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var mMap: GoogleMap
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private var selectedMarker: Marker? = null
+
+    private lateinit var imageUri: Uri
+    private var imageFile: File? = null
+
+    private val cameraLauncher: ActivityResultLauncher<Intent> = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            val imageBitmap = BitmapFactory.decodeFile(imageFile!!.path)
+            uploadImageToFirebase(imageBitmap)
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -67,6 +90,10 @@ class NewItemActivity : AppCompatActivity(), OnMapReadyCallback {
         }
     }
 
+    private fun uploadImageToFirebase(bitmap: Bitmap) {
+
+    }
+
     private fun setupGoogleMap() {
         val mapFragment = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
@@ -77,7 +104,7 @@ class NewItemActivity : AppCompatActivity(), OnMapReadyCallback {
         if (checkSelfPermission(
                 this,
                 android.Manifest.permission.ACCESS_FINE_LOCATION
-        ) == PackageManager.PERMISSION_GRANTED) {
+        ) == PERMISSION_GRANTED) {
             // Permissão já concedida
             loadCurrentLocation()
         } else {
@@ -107,16 +134,22 @@ class NewItemActivity : AppCompatActivity(), OnMapReadyCallback {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
 
         if (requestCode == LOCATION_PERMISSION_REQUEST_CODE) {
-            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            if (grantResults.isNotEmpty() && grantResults[0] == PERMISSION_GRANTED) {
                 loadCurrentLocation()
             } else {
-                Toast.makeText(
-                    this,
-                    "Permissão de Localização negada",
-                    Toast.LENGTH_SHORT
-                ).show()
+                showToast("Permissão de Localização negada")
+            }
+        } else if(requestCode == CAMERA_REQUEST_CODE) {
+            if (grantResults.isNotEmpty() && grantResults[0] == PERMISSION_GRANTED) {
+                openCamera()
+            } else {
+                showToast("Permissão de Câmera Negada")
             }
         }
+    }
+
+    private fun showToast(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 
     private fun setupView() {
@@ -129,6 +162,54 @@ class NewItemActivity : AppCompatActivity(), OnMapReadyCallback {
         binding.saveCta.setOnClickListener {
             save()
         }
+        binding.takePictureCta.setOnClickListener {
+            takePicture()
+        }
+    }
+
+    private fun takePicture() {
+        if (checkSelfPermission(this, android.Manifest.permission.CAMERA) == PERMISSION_GRANTED) {
+            openCamera()
+        } else {
+            requestCameraPermission()
+        }
+    }
+
+    private fun openCamera() {
+        val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        imageUri = createImageUri()
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri)
+        cameraLauncher.launch(intent)
+    }
+
+    private fun createImageUri(): Uri {
+        val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
+        val imageFileName = "JPEG_${timeStamp}_"
+
+        // Obtém o diretório de armazenamento externo para imagens
+        val storageDir: File? = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+
+        // Cria um arquivo de imagem
+        imageFile = File.createTempFile(
+            imageFileName,  /* prefix */
+            ".jpg",         /* suffix */
+            storageDir      /* directory */
+        )
+
+        // Retorna o URI para o arquivo
+        return FileProvider.getUriForFile(
+            this,  // Contexto
+            "com.example.minhaprimeiraapi.fileprovider", // Autoridade
+            imageFile!! // O arquivo
+        )
+    }
+
+    private fun requestCameraPermission() {
+        requestPermissions(
+            this,
+            arrayOf(android.Manifest.permission.CAMERA),
+            CAMERA_REQUEST_CODE
+        )
     }
 
     private fun save() {
@@ -204,6 +285,7 @@ class NewItemActivity : AppCompatActivity(), OnMapReadyCallback {
     companion object {
 
         private const val LOCATION_PERMISSION_REQUEST_CODE = 100
+        private const val CAMERA_REQUEST_CODE = 101
 
         fun newIntent(context: Context) =
             Intent(context, NewItemActivity::class.java)

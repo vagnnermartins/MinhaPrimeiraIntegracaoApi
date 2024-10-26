@@ -14,4 +14,5 @@
     <string name="send_sms">Enviar SMS</string>
     <string name="hint_verify_sms">123456</string>
     <string name="verify_sms">Verificar SMS</string>
+    <string name="logout">Logout</string>
 </resources>

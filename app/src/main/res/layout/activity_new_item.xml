@@ -62,14 +62,32 @@
         app:layout_constraintTop_toBottomOf="@id/age" />
 
     <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/address"
+        android:id="@+id/profession"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        android:hint="Address"
+        android:hint="Profession"
         app:layout_constraintStart_toStartOf="@id/name"
         app:layout_constraintEnd_toEndOf="@id/name"
         app:layout_constraintTop_toBottomOf="@id/imageUrl" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/mapContent"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="12dp"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/profession"
+        app:layout_constraintBottom_toTopOf="@id/saveCta"
+        tools:visibility="visible">
+
+        <fragment
+            android:id="@+id/map"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ImageButton
         android:id="@+id/saveCta"
@@ -78,7 +96,7 @@
         android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/address"
+        app:layout_constraintBottom_toBottomOf="parent"
         android:src="@android:drawable/ic_menu_save" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

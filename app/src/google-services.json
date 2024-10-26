@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "428585243357",
+    "project_id": "minhaprimeiraapi-f86fb",
+    "storage_bucket": "minhaprimeiraapi-f86fb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:428585243357:android:e2faa9e5fb367ef63cc134",
+        "android_client_info": {
+          "package_name": "com.example.minhaprimeiraapi"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "428585243357-2v5dgakm47ocalbprcso3ael6hfdq6de.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.minhaprimeiraapi",
+            "certificate_hash": "55e4faea0e1abed100ca27cb5e1ac2d12b424bda"
+          }
+        },
+        {
+          "client_id": "428585243357-h2efd0i7lfiqs0h30vtj1k6pksld6k05.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCQujYZOT-XbGPzRPRp9Gsy4ampuve4zck"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "428585243357-h2efd0i7lfiqs0h30vtj1k6pksld6k05.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

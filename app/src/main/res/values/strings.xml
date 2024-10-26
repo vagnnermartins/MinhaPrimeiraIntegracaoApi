@@ -9,4 +9,9 @@
     <string name="success_update">Item atualizado com sucesso</string>
     <string name="unknown_error">Erro desconhecido, tente novamente!</string>
     <string name="denied_permission">Permissão não concedida</string>
+    <string name="hint_cellphone">+55 11 912345678</string>
+    <string name="code_brazil">+55</string>
+    <string name="send_sms">Enviar SMS</string>
+    <string name="hint_verify_sms">123456</string>
+    <string name="verify_sms">Verificar SMS</string>
 </resources>
